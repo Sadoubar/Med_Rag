@@ -57,11 +57,16 @@ def _extract_via_api(pdf_path: Path, api_url: str, api_key: Optional[str]) -> st
 
     headers = {}
     if api_key:
-        headers["Authorization"] = f"Bearer {api_key}"
+        headers["X-API-Key"] = api_key
+
+    # Construire l'URL du endpoint /extract
+    url = api_url.rstrip("/")
+    if not url.endswith("/extract"):
+        url = url + "/extract"
 
     with open(pdf_path, "rb") as f:
         files = {"file": (pdf_path.name, f, "application/pdf")}
-        response = requests.post(api_url, files=files, headers=headers, timeout=300)
+        response = requests.post(url, files=files, headers=headers, timeout=600)
 
     if response.status_code != 200:
         raise ExtractionError(
