@@ -1,0 +1,59 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "medrag"
+version = "0.1.0"
+description = "Pipeline RAG medical adaptatif pour guides cliniques francophones"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Sadou BARRY", email = "sadoubarry1za@gmail.com"},
+]
+keywords = ["rag", "medical", "nlp", "chromadb", "bm25", "french"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Healthcare Industry",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "chromadb>=0.4",
+    "sentence-transformers>=2.2",
+    "rank-bm25>=0.2",
+    "rich>=13.0",
+    "typer>=0.9",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+docling = [
+    "docling>=2.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/Sadoubar/Med_Rag"
+Repository = "https://github.com/Sadoubar/Med_Rag"
+Issues = "https://github.com/Sadoubar/Med_Rag/issues"
+
+[project.scripts]
+medrag-hierarchy = "medrag.hierarchy:app"
+medrag-chunk = "medrag.chunk:app"
+medrag-index = "medrag.index:app"
+medrag-search = "medrag.search:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
